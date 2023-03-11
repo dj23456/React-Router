@@ -1,0 +1,168 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang16393{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\qc\f0\fs72\lang9 (List and Hooks)\par
+
+\pard\sa200\sl276\slmult1\ul\b\f1\fs28\bullet  Explain Life cycle in Class Component and functional component with Hooks\f0\lang16393  :-\par
+\par
+Life cycle:-\ulnone\b0\par
+In ReactJS, every component creation process involves various lifecycle methods. These lifecycle methods are termed as component's lifecycle. These lifecycle methods are not very complicated and called at various points during a component's life. The lifecycle of the component is divided into four phases. They are:\par
+\par
+Initial Phase\par
+Mounting Phase\par
+Updating Phase\par
+Unmounting Phase\par
+Each phase contains some lifecycle methods that are specific to the particular phase. Let us discuss each of these phases one by one.\par
+\ul\b\lang9 1. Initial Phase\ulnone\b0\par
+It is the birth phase of the lifecycle of a ReactJS component. Here, the component starts its journey on a way to the DOM. In this phase, a component contains the default Props and initial State. These default properties are done in the constructor of a component. The initial phase only occurs once and consists of the following methods.\par
+\par
+\b getDefaultProps()\b0\par
+It is used to specify the default value of this.props. It is invoked before the creation of the component or any props from the parent is passed into it.\par
+\b getInitialState()\par
+\b0 It is used to specify the default value of this.state. It is invoked before the creation of the component.\par
+\ul\b 2. Mounting Phase\ulnone\b0\par
+In this phase, the instance of a component is created and inserted into the DOM. It consists of the following methods.\par
+\b componentWillMount()\b0\par
+This is invoked immediately before a component gets rendered into the DOM. In the case, when you call setState() inside this method, the component will not re-render.\par
+\b componentDidMount()\b0\par
+This is invoked immediately after a component gets rendered and placed on the DOM. Now, you can do any DOM querying operations.\par
+\b render()\b0\par
+This method is defined in each and every component. It is responsible for returning a single root HTML node element. If you don't want to render anything, you can return a null or false value.\par
+\ul\b 3. Updating Phase\ulnone\b0\par
+It is the next phase of the lifecycle of a react component. Here, we get new Props and change State. This phase also allows to handle user interaction and provide communication with the components hierarchy. The main aim of this phase is to ensure that the component is displaying the latest version of itself. Unlike the Birth or Death phase, this phase repeats again and again. This phase consists of the following methods.\par
+\par
+\b componentWillRecieveProps()\b0\par
+It is invoked when a component receives new props. If you want to update the state in response to prop changes, you should compare this.props and nextProps to perform state transition by using this.setState() method.\par
+\b shouldComponentUpdate()\b0\par
+It is invoked when a component decides any changes/updation to the DOM. It allows you to control the component's behavior of updating itself. If this method returns true, the component will update. Otherwise, the component will skip the updating.\par
+\b componentWillUpdate()\b0\par
+It is invoked just before the component updating occurs. Here, you can't change the component state by invoking this.setState() method. It will not be called, if shouldComponentUpdate() returns false.\par
+\b render()\b0\par
+It is invoked to examine this.props and this.state and return one of the following types: React elements, Arrays and fragments, Booleans or null, String and Number. If shouldComponentUpdate() returns false, the code inside render() will be invoked again to ensure that the component displays itself properly.\par
+\b componentDidUpdate()\b0\par
+It is invoked immediately after the component updating occurs. In this method, you can put any code inside this which you want to execute once the updating occurs. This method is not invoked for the initial render.\par
+\ul\b 4. Unmounting Phase\ulnone\b0\par
+It is the final phase of the react component lifecycle. It is called when a component instance is destroyed and unmounted from the DOM. This phase contains only one method and is given below.\par
+\par
+\b componentWillUnmount()\b0\par
+This method is invoked immediately before a component is destroyed and unmounted permanently. It performs any necessary cleanup related task such as invalidating timers, event listener, canceling network requests, or cleaning up DOM elements. If a component instance is unmounted, you cannot mount it again.\par
+Example:-\par
+import React, \{ Component \} from 'react';  \par
+  \par
+class App extends React.Component \{  \par
+   constructor(props) \{  \par
+      super(props);  \par
+      this.state = \{hello: "JavaTpoint"\};  \par
+      this.changeState = this.changeState.bind(this)  \par
+   \}    \par
+   render() \{  \par
+      return (  \par
+         <div>  \par
+             <h1>ReactJS component's Lifecycle</h1>  \par
+             <h3>Hello \{this.state.hello\}</h3>  \par
+             <button onClick = \{this.changeState\}>Click Here!</button>          \par
+         </div>  \par
+      );  \par
+   \}  \par
+   componentWillMount() \{  \par
+      console.log('Component Will MOUNT!')  \par
+   \}  \par
+   componentDidMount() \{  \par
+      console.log('Component Did MOUNT!')  \par
+   \}  \par
+   changeState()\{  \par
+      this.setState(\{hello:"All!!- Its a great reactjs tutorial."\});  \par
+   \}  \par
+   componentWillReceiveProps(newProps) \{      \par
+      console.log('Component Will Recieve Props!')  \par
+   \}  \par
+   shouldComponentUpdate(newProps, newState) \{  \par
+      return true;  \par
+   \}  \par
+   componentWillUpdate(nextProps, nextState) \{  \par
+      console.log('Component Will UPDATE!');  \par
+   \}  \par
+   componentDidUpdate(prevProps, prevState) \{  \par
+      console.log('Component Did UPDATE!')  \par
+   \}  \par
+   componentWillUnmount() \{  \par
+      console.log('Component Will UNMOUNT!')  \par
+   \}  \par
+\}  \par
+export default App; \par
+\par
+\ul\b\fs36 Hooks:-\par
+\ulnone\b0\fs28 Hooks are the new feature introduced in the React 16.8 version. It allows you to use state and other React features without writing a class. Hooks are the functions which "hook into" React state and lifecycle features from function components. It does not work inside classes.\par
+\par
+Hooks are backward-compatible, which means it does not contain any breaking changes. Also, it does not replace your knowledge of React concepts.\par
+\b Hooks State\b0\par
+Hook state is the new way of declaring a state in React app. Hook uses useState() functional component for setting and retrieving state. Let us understand Hook state with the following example.\par
+Example:-\par
+import React, \{ useState \} from 'react';  \par
+  \par
+function CountApp() \{  \par
+  // Declare a new state variable, which we'll call "count"  \par
+  const [count, setCount] = useState(0);  \par
+  \par
+  return (  \par
+    <div>  \par
+      <p>You clicked \{count\} times</p>  \par
+      <button onClick=\{() => setCount(count + 1)\}>  \par
+        Click me  \par
+      </button>  \par
+    </div>  \par
+  );  \par
+\}  \par
+export default CountApp;  \par
+\par
+\ul\b\i Hooks Effect\ulnone\b0\i0\par
+The Effect Hook allows us to perform side effects (an action) in the function components. It does not use components lifecycle methods which are available in class components. In other words, Effects Hooks are equivalent to componentDidMount(), componentDidUpdate(), and componentWillUnmount() lifecycle methods.\par
+\par
+Side effects have common features which the most web applications need to perform, such as:\par
+\par
+Updating the DOM,\par
+Fetching and consuming data from a server API,\par
+Setting up a subscription, etc.\par
+\par
+Example:-\par
+import React, \{ useState, useEffect \} from 'react';  \par
+  \par
+function CounterExample() \{  \par
+  const [count, setCount] = useState(0);  \par
+  \par
+  // Similar to componentDidMount and componentDidUpdate:  \par
+  useEffect(() => \{  \par
+    // Update the document title using the browser API  \par
+    document.title = `You clicked $\{count\} times`;  \par
+  \});  \par
+  \par
+  return (  \par
+    <div>  \par
+      <p>You clicked \{count\} times</p>  \par
+      <button onClick=\{() => setCount(count + 1)\}>  \par
+        Click me  \par
+      </button>  \par
+    </div>  \par
+  );  \par
+\}  \par
+export default CounterExample;  \par
+\par
+\ul\b Built-in Hooks\ulnone\b0\par
+Here, we describe the APIs for the built-in Hooks in React. The built-in Hooks can be divided into two parts, which are given below.\par
+\par
+\b Basic Hooks\b0\par
+useState\par
+useEffect\par
+useContext\par
+\b\par
+Additional Hooks\par
+\b0 useReducer\par
+useCallback\par
+useMemo\par
+useRef\par
+useImperativeHandle\par
+useLayoutEffect\par
+useDebugValue\par
+\par
+\par
+}
+ 
